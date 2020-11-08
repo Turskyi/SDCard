@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+
+        <TextView
+            android:id="@+id/tvExternalFilesDirs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World!" />
+
+        <TextView
+            android:id="@+id/tvExternalCacheDirs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="20dp"
+            android:text="Hello World!" />
+
+        <TextView
+            android:id="@+id/tvExternalMediaDirs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="20dp"
+            android:text="Hello World!" />
+
+        <TextView
+            android:id="@+id/tvIsSdCardInserted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="20dp"
+            android:text="Hello World!" />
+
+        <TextView
+            android:id="@+id/tvUriPictureTitle"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:text="picture from uri" />
+
+        <ImageView
+            android:id="@+id/ivUriPicture"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:visibility="gone"
+            android:contentDescription="@string/image"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="20dp"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/tvPathPictureTitle"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:text="picture from path" />
+
+        <ImageView
+            android:id="@+id/jpgview"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:visibility="gone"
+            android:contentDescription="@string/image"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="20dp"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get Image" />
+
+        <TextView
+            android:id="@+id/textviewjpgname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:paddingVertical="20dp"
+            android:text="path to image view" />
+
+    </LinearLayout>
+</ScrollView>

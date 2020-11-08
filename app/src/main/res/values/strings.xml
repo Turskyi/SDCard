@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">SDCard</string>
+    <string name="image">image</string>
+    <string name="flag_chooser_title_complete_using">Complete action using</string>
+    <string name="flag_message_did_not_choose">did not choose anything</string>
+</resources>
