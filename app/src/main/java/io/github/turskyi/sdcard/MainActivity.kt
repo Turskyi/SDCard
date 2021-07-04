@@ -22,10 +22,6 @@ import java.io.FileNotFoundException
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        const val APP_TAG = "CD card methods demonstration app"
-    }
-
     private lateinit var photoPickerResultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,17 +34,17 @@ class MainActivity : AppCompatActivity() {
         showWhetherSdCardInserted()
         initListener()
         initResultLauncher()
-        
+
     }
 
     private fun initListener() {
-        val button = findViewById<Button>(R.id.button)
+        val button: Button = findViewById(R.id.button)
         button.setOnClickListener {
             val action: String = Intent.ACTION_OPEN_DOCUMENT
             val intent = Intent(action)
             intent.type = "image/jpeg"
 
-            val intentChooser = Intent.createChooser(intent, getString(R.string.flag_chooser_title_complete_using))
+            val intentChooser: Intent = Intent.createChooser(intent, getString(R.string.flag_chooser_title_complete_using))
             photoPickerResultLauncher.launch(intentChooser)
         }
     }
@@ -60,11 +56,7 @@ class MainActivity : AppCompatActivity() {
             if (result.resultCode == Activity.RESULT_OK) {
                 val photoChooserIntent: Intent? = result.data
                 val selectedImageUri = photoChooserIntent?.data
-
                 showImageFromUri(selectedImageUri)
-
-//                TODO: so far there is no way to find out the path programmatically
-//                showPictureIfWeKnowPath("/sdcard/DSC_3524.JPG")
             } else {
                 Toast.makeText(this, getString(R.string.flag_message_did_not_choose),
                         Toast.LENGTH_SHORT).show()
@@ -74,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showImageFromUri(selectedImageUri: Uri?) {
         if (selectedImageUri != null) {
-            val options = BitmapFactory.Options()
+            val options: BitmapFactory.Options = BitmapFactory.Options()
             options.inJustDecodeBounds = true
             try {
                 BitmapFactory.decodeStream(contentResolver.openInputStream(selectedImageUri), null, options)
@@ -90,14 +82,12 @@ class MainActivity : AppCompatActivity() {
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
             }
-
-
         }
     }
 
     private fun calculateInSampleSize(
             options: BitmapFactory.Options, @Suppress("SameParameterValue") reqWidth: Int, @Suppress("SameParameterValue") reqHeight: Int): Int {
-        /* Raw height and width of image */
+        // Raw height and width of image
         val height = options.outHeight
         val width = options.outWidth
         var inSampleSize = 1
@@ -115,22 +105,8 @@ class MainActivity : AppCompatActivity() {
         return inSampleSize
     }
 
-    private fun showPictureIfWeKnowPath(path: String?) {
-        val textJpgName = findViewById<View>(R.id.textviewjpgname) as TextView
-        val jpgView: ImageView = findViewById<View>(R.id.jpgview) as ImageView
-        /* display the path in the text box */
-        textJpgName.visibility = VISIBLE
-        jpgView.visibility = VISIBLE
-        textJpgName.text = path
-        val options = BitmapFactory.Options()
-        /* makes image smaller for easier upload to image view */
-        options.inSampleSize = 2
-        val bm = BitmapFactory.decodeFile(path, options)
-        jpgView.setImageBitmap(bm)
-    }
-
     private fun showWhetherSdCardInserted() {
-        val mInfoTextView = findViewById<TextView>(R.id.tvIsSdCardInserted)
+        val mInfoTextView: TextView = findViewById<TextView>(R.id.tvIsSdCardInserted)
         mInfoTextView.text = "Is SD card inserted: ${isSDCardInserted()}"
     }
 
@@ -139,7 +115,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showPathsOfVisibleSdCards() {
-        /* API 21 */
         val externalMediaDirs = externalMediaDirs
         var info = "\ngetExternalMediaDirs():\n"
         for (file in externalMediaDirs) {
@@ -148,12 +123,12 @@ class MainActivity : AppCompatActivity() {
             """.trimIndent()
         }
         val mInfoTextView = findViewById<TextView>(R.id.tvExternalMediaDirs)
-        /* show paths of sd card visible folders: internal and external*/
+        // show paths of sd card visible folders: internal and external
         mInfoTextView.text = info
     }
 
     private fun showPathsToChaches() {
-        /* API 19 */
+        // API 19
         val externalCacheDirs = externalCacheDirs
         var info = "\ngetExternalCacheDirs():\n"
         for (file in externalCacheDirs) {
@@ -162,19 +137,19 @@ class MainActivity : AppCompatActivity() {
             """.trimIndent()
         }
         val mInfoTextView = findViewById<TextView>(R.id.tvExternalCacheDirs)
-        /* show paths of cache directories: internal and external*/
+        // show paths of cache directories: internal and external
         mInfoTextView.text = info
     }
 
     private fun showPathsToFiles() {
-        /* API 19 */
+        // API 19
         val externalFilesDirs: Array<File> = getExternalFilesDirs(null)
         var info = "\ngetExternalFilesDirs(null):\n"
         for (file in externalFilesDirs) {
             info += file.absolutePath.toString() + "\n"
         }
         val mInfoTextView = findViewById<TextView>(R.id.tvExternalFilesDirs)
-        /* show paths of file directories: internal and external*/
+        // show paths of file directories: internal and external
         mInfoTextView.text = info
     }
 }

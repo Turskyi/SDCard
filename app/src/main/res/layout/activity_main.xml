@@ -79,13 +79,5 @@
             android:layout_height="wrap_content"
             android:text="Get Image" />
 
-        <TextView
-            android:id="@+id/textviewjpgname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:paddingVertical="20dp"
-            android:text="path to image view" />
-
     </LinearLayout>
 </ScrollView>
