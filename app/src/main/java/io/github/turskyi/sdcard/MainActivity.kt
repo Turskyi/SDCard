@@ -1,6 +1,7 @@
 package io.github.turskyi.sdcard
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.BitmapFactory
@@ -9,15 +10,15 @@ import android.os.Bundle
 import android.os.Environment
 import android.view.View
 import android.view.View.VISIBLE
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputEditText
 import java.io.File
 import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,13 +33,18 @@ class MainActivity : AppCompatActivity() {
         showPathsToChaches()
         showPathsOfVisibleSdCards()
         showWhetherSdCardInserted()
-        initListener()
+        initListeners()
         initResultLauncher()
 
     }
 
-    private fun initListener() {
+    private fun initListeners() {
         val button: Button = findViewById(R.id.button)
+        val saveFileButton = findViewById<Button>(R.id.button_save)
+        val fileNameEditText = findViewById<TextInputEditText>(R.id.edit_filename)
+        val contentEditText = findViewById<TextInputEditText>(R.id.edit_content)
+        val getFileListButton: Button = findViewById(R.id.button_get_file_list)
+        val savedFilesListView: ListView = findViewById(R.id.list_files)
         button.setOnClickListener {
             val action: String = Intent.ACTION_OPEN_DOCUMENT
             val intent = Intent(action)
@@ -46,6 +52,44 @@ class MainActivity : AppCompatActivity() {
 
             val intentChooser: Intent = Intent.createChooser(intent, getString(R.string.flag_chooser_title_complete_using))
             photoPickerResultLauncher.launch(intentChooser)
+        }
+
+        saveFileButton.setOnClickListener {
+            val fileName: String = fileNameEditText.text.toString() // name of future file
+            val content: String = contentEditText.text.toString() // text of description text
+            val fos: FileOutputStream
+            try {
+                fos = openFileOutput(
+                    fileName,
+                    Context.MODE_PRIVATE
+                ) // open file to write
+                fos.write(content.toByteArray()) // write data
+                fos.close() // close file
+
+                // show if success
+                Toast.makeText(
+                    applicationContext,
+                    "File $fileName saved", Toast.LENGTH_LONG
+                ).show()
+            } catch (e: FileNotFoundException) {
+                e.printStackTrace()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+
+        getFileListButton.setOnClickListener { v ->
+            val savedFilesArray: Array<String> = fileList() // get array of names
+
+            Toast.makeText(this, "${savedFilesArray.size} files", Toast.LENGTH_SHORT).show()
+
+            // set array to adapter
+            val adapter: ArrayAdapter<String> = ArrayAdapter(
+                v.context,  //getApplicationContext(),
+                android.R.layout.simple_list_item_1, savedFilesArray
+            )
+            // show list of files
+            savedFilesListView.adapter = adapter
         }
     }
 

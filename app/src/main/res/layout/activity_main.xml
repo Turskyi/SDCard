@@ -1,83 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:nestedScrollingEnabled="true"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        tools:context=".MainActivity">
+        android:text="Enter name of the file" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tvExternalFilesDirs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!" />
-
-        <TextView
-            android:id="@+id/tvExternalCacheDirs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingVertical="20dp"
-            android:text="Hello World!" />
-
-        <TextView
-            android:id="@+id/tvExternalMediaDirs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingVertical="20dp"
-            android:text="Hello World!" />
-
-        <TextView
-            android:id="@+id/tvIsSdCardInserted"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingVertical="20dp"
-            android:text="Hello World!" />
-
-        <TextView
-            android:id="@+id/tvUriPictureTitle"
-            android:layout_width="wrap_content"
-            android:visibility="gone"
-            android:layout_height="wrap_content"
-            android:text="picture from uri" />
-
-        <ImageView
-            android:id="@+id/ivUriPicture"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_filename"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:visibility="gone"
-            android:contentDescription="@string/image"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="20dp"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-        <TextView
-            android:id="@+id/tvPathPictureTitle"
-            android:layout_width="wrap_content"
-            android:visibility="gone"
             android:layout_height="wrap_content"
-            android:text="picture from path" />
+            android:hint="file.txt" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <ImageView
-            android:id="@+id/jpgview"
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_content"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:visibility="gone"
-            android:contentDescription="@string/image"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="20dp"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Get Image" />
+            android:hint="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
-</ScrollView>
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save" />
+
+    <Button
+        android:id="@+id/button_get_file_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get file list" />
+
+    <ListView
+        android:id="@+id/list_files"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:context=".MainActivity">
+
+            <TextView
+                android:id="@+id/tvExternalFilesDirs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hello World!" />
+
+            <TextView
+                android:id="@+id/tvExternalCacheDirs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="20dp"
+                android:text="Hello World!" />
+
+            <TextView
+                android:id="@+id/tvExternalMediaDirs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="20dp"
+                android:text="Hello World!" />
+
+            <TextView
+                android:id="@+id/tvIsSdCardInserted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="20dp"
+                android:text="Hello World!" />
+
+            <TextView
+                android:id="@+id/tvUriPictureTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="picture from uri"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/ivUriPicture"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:contentDescription="@string/image"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="20dp"
+                android:visibility="gone"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <TextView
+                android:id="@+id/tvPathPictureTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="picture from path"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/jpgview"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:contentDescription="@string/image"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="20dp"
+                android:visibility="gone"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get Image" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
